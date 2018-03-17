@@ -11,12 +11,13 @@
 		AFA6E7DF51B2BD9CDEB04138 /* Pods_Receipt_and_shopping_listTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9CD09519C6F67066FD8C55E4 /* Pods_Receipt_and_shopping_listTests.framework */; };
 		CE121723205CAEA80078CAC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121722205CAEA80078CAC9 /* AppDelegate.swift */; };
 		CE121725205CAEA80078CAC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121724205CAEA80078CAC9 /* ViewController.swift */; };
-		CE121728205CAEA80078CAC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE121726205CAEA80078CAC9 /* Main.storyboard */; };
 		CE12172A205CAEA80078CAC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE121729205CAEA80078CAC9 /* Assets.xcassets */; };
 		CE12172D205CAEA80078CAC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE12172B205CAEA80078CAC9 /* LaunchScreen.storyboard */; };
 		CE121738205CAEA80078CAC9 /* Receipt_and_shopping_listTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121737205CAEA80078CAC9 /* Receipt_and_shopping_listTests.swift */; };
 		CE121743205CAEA80078CAC9 /* Receipt_and_shopping_listUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121742205CAEA80078CAC9 /* Receipt_and_shopping_listUITests.swift */; };
 		CE12175A205CE0FE0078CAC9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121759205CE0FE0078CAC9 /* Model.swift */; };
+		CE12175D205D058F0078CAC9 /* AddHavingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */; };
+		CE12175F205D11920078CAC9 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12175E205D11920078CAC9 /* Common.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +45,6 @@
 		CE12171F205CAEA80078CAC9 /* Receipt_and_shopping_list.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Receipt_and_shopping_list.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE121722205CAEA80078CAC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CE121724205CAEA80078CAC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		CE121727205CAEA80078CAC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE121729205CAEA80078CAC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CE12172C205CAEA80078CAC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE12172E205CAEA80078CAC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -55,6 +55,8 @@
 		CE121742205CAEA80078CAC9 /* Receipt_and_shopping_listUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt_and_shopping_listUITests.swift; sourceTree = "<group>"; };
 		CE121744205CAEA80078CAC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE121759205CE0FE0078CAC9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHavingItemViewController.swift; sourceTree = "<group>"; };
+		CE12175E205D11920078CAC9 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		D47AC321A60802AE71A1C8C7 /* Pods-Receipt_and_shopping_list.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Receipt_and_shopping_list.release.xcconfig"; path = "Pods/Target Support Files/Pods-Receipt_and_shopping_list/Pods-Receipt_and_shopping_list.release.xcconfig"; sourceTree = "<group>"; };
 		FB0A597D4F5A5BC9075819CA /* Pods-Receipt_and_shopping_list.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Receipt_and_shopping_list.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Receipt_and_shopping_list/Pods-Receipt_and_shopping_list.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -121,9 +123,10 @@
 			isa = PBXGroup;
 			children = (
 				CE121722205CAEA80078CAC9 /* AppDelegate.swift */,
+				CE12175E205D11920078CAC9 /* Common.swift */,
 				CE121759205CE0FE0078CAC9 /* Model.swift */,
 				CE121724205CAEA80078CAC9 /* ViewController.swift */,
-				CE121726205CAEA80078CAC9 /* Main.storyboard */,
+				CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */,
 				CE121729205CAEA80078CAC9 /* Assets.xcassets */,
 				CE12172B205CAEA80078CAC9 /* LaunchScreen.storyboard */,
 				CE12172E205CAEA80078CAC9 /* Info.plist */,
@@ -275,7 +278,6 @@
 			files = (
 				CE12172D205CAEA80078CAC9 /* LaunchScreen.storyboard in Resources */,
 				CE12172A205CAEA80078CAC9 /* Assets.xcassets in Resources */,
-				CE121728205CAEA80078CAC9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -410,7 +412,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE121725205CAEA80078CAC9 /* ViewController.swift in Sources */,
+				CE12175D205D058F0078CAC9 /* AddHavingItemViewController.swift in Sources */,
 				CE12175A205CE0FE0078CAC9 /* Model.swift in Sources */,
+				CE12175F205D11920078CAC9 /* Common.swift in Sources */,
 				CE121723205CAEA80078CAC9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,14 +451,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		CE121726205CAEA80078CAC9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE121727205CAEA80078CAC9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		CE12172B205CAEA80078CAC9 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

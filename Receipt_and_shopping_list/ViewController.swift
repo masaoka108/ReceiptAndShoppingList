@@ -9,20 +9,6 @@
 import UIKit
 import RealmSwift
 
-//import Model
-
-//class Dog: Object {
-//    @objc dynamic var name = ""
-//    @objc dynamic var age = 0
-//}
-//
-//class Person: Object {
-//    @objc dynamic var name = ""
-//    let dogs = List<Dog>()
-//}
-
-
-
 class ViewController: UIViewController, UITabBarDelegate {
 
     private var myTabBar:TabBar!
@@ -31,13 +17,16 @@ class ViewController: UIViewController, UITabBarDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
+        self.view.backgroundColor = UIColor.white
+        
         //******** デフォルトのデータをロード
         defaultDataLoad()
 
-        //******** タブメニューを作成
+        //******** タブメニューを配置
         createTabUI()
         
-
+        //******** ボタンを配置
+        createButton()
 
     }
 
@@ -156,6 +145,41 @@ class ViewController: UIViewController, UITabBarDelegate {
         self.view.addSubview(myTabBar)
  
     }
+
+    func createButton() {
+        
+        //「材料追加」ボタン
+        let addHavingItemButton = UIButton(frame: CGRect(x: 10,y: self.view.frame.height - 230,width: self.view.frame.width/2 - 10,height:70))
+        addHavingItemButton.setTitle("材料追加", for: .normal)
+        addHavingItemButton.backgroundColor = cRed
+        addHavingItemButton.addTarget(self, action: #selector(ViewController.goNext(_:)), for: .touchUpInside)
+        addHavingItemButton.layer.cornerRadius = 10
+        view.addSubview(addHavingItemButton)
+        
+        //「選択を削除」ボタン
+        let delButton = UIButton(frame: CGRect(x: self.view.frame.width/2 + 10,y: self.view.frame.height - 230,width: self.view.frame.width/2 - 20,height:70))
+        delButton.setTitle("選択を削除", for: .normal)
+        delButton.backgroundColor = UIColor.lightGray
+        //delButton.addTarget(self, action: #selector(ViewController.goNext(_:)), for: .touchUpInside)
+        delButton.layer.cornerRadius = 10
+        view.addSubview(delButton)
+
+        //「選択した材料でレシピを検索」ボタン
+        let searchButton = UIButton(frame: CGRect(x: 10,y: self.view.frame.height - 150,width: self.view.frame.width - 20,height:70))
+        searchButton.setTitle("選択した材料でレシピを検索", for: .normal)
+        searchButton.backgroundColor = UIColor(hue: 0.5778, saturation: 0.44, brightness: 0.93, alpha: 1.0)
+        searchButton.setTitleColor(UIColor.white, for: .normal)
+        //delButton.addTarget(self, action: #selector(ViewController.goNext(_:)), for: .touchUpInside)
+        searchButton.layer.cornerRadius = 10
+        view.addSubview(searchButton)
+
+    }
+    
+    @objc func goNext(_ sender: UIButton) {// selectorで呼び出す場合Swift4からは「@objc」をつける。
+        let nextvc = AddHavingItemViewController()
+        nextvc.view.backgroundColor = UIColor(hue: 0.1833, saturation: 0.13, brightness: 1, alpha: 1.0)
+        self.present(nextvc, animated: true, completion: nil)
+    }
     
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.tag{
@@ -163,12 +187,6 @@ class ViewController: UIViewController, UITabBarDelegate {
             print("１")
         case 2:
             print("２")
-//        case 3:
-//            print("３")
-//        case 4:
-//            print("４")
-//        case 5:
-//            print("５")
         default : return
             
         }
