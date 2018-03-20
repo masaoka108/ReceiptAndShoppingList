@@ -18,6 +18,8 @@
 		CE12175A205CE0FE0078CAC9 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE121759205CE0FE0078CAC9 /* Model.swift */; };
 		CE12175D205D058F0078CAC9 /* AddHavingItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */; };
 		CE12175F205D11920078CAC9 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE12175E205D11920078CAC9 /* Common.swift */; };
+		CE1E7F102060ED80007E2B00 /* ReceiptListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1E7F0F2060ED80007E2B00 /* ReceiptListViewController.swift */; };
+		CE3CA69C2061403C00F91C10 /* UIImage+resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CA69B2061403C00F91C10 /* UIImage+resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		CE121759205CE0FE0078CAC9 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHavingItemViewController.swift; sourceTree = "<group>"; };
 		CE12175E205D11920078CAC9 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		CE1E7F0F2060ED80007E2B00 /* ReceiptListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptListViewController.swift; sourceTree = "<group>"; };
+		CE3CA69B2061403C00F91C10 /* UIImage+resize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+resize.swift"; sourceTree = "<group>"; };
 		D47AC321A60802AE71A1C8C7 /* Pods-Receipt_and_shopping_list.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Receipt_and_shopping_list.release.xcconfig"; path = "Pods/Target Support Files/Pods-Receipt_and_shopping_list/Pods-Receipt_and_shopping_list.release.xcconfig"; sourceTree = "<group>"; };
 		FB0A597D4F5A5BC9075819CA /* Pods-Receipt_and_shopping_list.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Receipt_and_shopping_list.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Receipt_and_shopping_list/Pods-Receipt_and_shopping_list.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -122,11 +126,13 @@
 		CE121721205CAEA80078CAC9 /* Receipt_and_shopping_list */ = {
 			isa = PBXGroup;
 			children = (
+				CE3CA69920613FCD00F91C10 /* extensions */,
 				CE121722205CAEA80078CAC9 /* AppDelegate.swift */,
 				CE12175E205D11920078CAC9 /* Common.swift */,
 				CE121759205CE0FE0078CAC9 /* Model.swift */,
 				CE121724205CAEA80078CAC9 /* ViewController.swift */,
 				CE12175C205D058F0078CAC9 /* AddHavingItemViewController.swift */,
+				CE1E7F0F2060ED80007E2B00 /* ReceiptListViewController.swift */,
 				CE121729205CAEA80078CAC9 /* Assets.xcassets */,
 				CE12172B205CAEA80078CAC9 /* LaunchScreen.storyboard */,
 				CE12172E205CAEA80078CAC9 /* Info.plist */,
@@ -150,6 +156,22 @@
 				CE121744205CAEA80078CAC9 /* Info.plist */,
 			);
 			path = Receipt_and_shopping_listUITests;
+			sourceTree = "<group>";
+		};
+		CE3CA69920613FCD00F91C10 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CA69A2061400A00F91C10 /* UIImage */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
+		CE3CA69A2061400A00F91C10 /* UIImage */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CA69B2061403C00F91C10 /* UIImage+resize.swift */,
+			);
+			path = UIImage;
 			sourceTree = "<group>";
 		};
 		D97CB846DBC606B5DA881040 /* Pods */ = {
@@ -412,6 +434,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CE121725205CAEA80078CAC9 /* ViewController.swift in Sources */,
+				CE3CA69C2061403C00F91C10 /* UIImage+resize.swift in Sources */,
+				CE1E7F102060ED80007E2B00 /* ReceiptListViewController.swift in Sources */,
 				CE12175D205D058F0078CAC9 /* AddHavingItemViewController.swift in Sources */,
 				CE12175A205CE0FE0078CAC9 /* Model.swift in Sources */,
 				CE12175F205D11920078CAC9 /* Common.swift in Sources */,

@@ -8,10 +8,17 @@
 
 import UIKit
 
+protocol ViewControllerDelegate
+{
+    // デリゲート関数を定義
+    func reloadScrollView()
+}
+
 class AddHavingItemViewController: UIViewController, UITextFieldDelegate {
     
     var nameTextField: UITextField?
-    
+    var delegate: ViewControllerDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -23,8 +30,45 @@ class AddHavingItemViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
     }
 
-    @objc func back(_ sender: UIButton) {// selectorで呼び出す場合Swift4からは「@objc」をつける。
+    @objc func back(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func addHavingItem(_ sender: UIButton) {
+        guard let itemName = nameTextField?.text else {
+            fatalError("名前が入力されていません。")
+        }
+        
+         Model.saveHavingItem(itemName:itemName);
+        
+        //**** Alert表示
+        let alert: UIAlertController = UIAlertController(title: "完了メッセージ", message: "材料の登録が完了しました。", preferredStyle:  UIAlertControllerStyle.alert)
+        // OKボタン
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ）
+            (action: UIAlertAction!) -> Void in
+            print("OK")
+
+//            ViewController.viewDidLoad(ViewController)
+
+            self.dismiss(animated: true, completion: {
+                () -> Void in
+                print("画面遷移後")
+                
+                if let dg = self.delegate {
+                    dg.reloadScrollView()
+                } else {
+                    print("delegate 未設定")
+                }
+            })
+            
+        })
+        
+        alert.addAction(defaultAction)
+        present(alert, animated: true, completion: nil)
+        
+        
+        
     }
     
     func createUI() {
@@ -54,7 +98,7 @@ class AddHavingItemViewController: UIViewController, UITextFieldDelegate {
         let addButton = UIButton(frame: CGRect(x: 10,y: self.view.frame.height - 75,width: self.view.frame.width - 20,height:70))
         addButton.setTitle("追加", for: .normal)
         addButton.backgroundColor = cRed
-        addButton.addTarget(self, action: #selector(AddHavingItemViewController.back(_:)), for: .touchUpInside)
+        addButton.addTarget(self, action: #selector(AddHavingItemViewController.addHavingItem(_:)), for: .touchUpInside)
         addButton.layer.cornerRadius = 10
         view.addSubview(addButton)
         

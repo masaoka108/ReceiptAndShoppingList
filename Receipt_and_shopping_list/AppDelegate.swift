@@ -12,16 +12,23 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var navigationController: UINavigationController?   //Navigation使用時に追加
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+//        //StoryBoadを廃止するときに記載
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window?.rootViewController = ViewController()
+//        self.window?.makeKeyAndVisible()
+
+        //Navigation使用時に追加
+        let viewController: ViewController = ViewController()
+        navigationController = UINavigationController(rootViewController: viewController)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window?.rootViewController = ViewController()
+        self.window?.rootViewController = navigationController
         self.window?.makeKeyAndVisible()
-        
         
         return true
     }
