@@ -49,8 +49,6 @@ class AddHavingItemViewController: UIViewController, UITextFieldDelegate {
             (action: UIAlertAction!) -> Void in
             print("OK")
 
-//            ViewController.viewDidLoad(ViewController)
-
             self.dismiss(animated: true, completion: {
                 () -> Void in
                 print("画面遷移後")

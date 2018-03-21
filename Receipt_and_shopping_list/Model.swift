@@ -34,6 +34,12 @@ class HavingItem: Object {
     @objc dynamic var selectFlg = false
 }
 
+
+class ShoppingList: Object {
+    @objc dynamic var item: Item? // optionals supported
+}
+
+
 let realm = try! Realm() // Create realm pointing to default file
 
 
@@ -45,7 +51,10 @@ class Model: NSObject {
 //            try FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
 //        } catch {}
 //    }
+
     
+    //MARK: Item
+
     class func saveItem(item:Item){
 
         try! realm.write {
@@ -56,6 +65,10 @@ class Model: NSObject {
         print("Number of Item: \(results.count)")
     }
 
+    
+    
+    
+    //MARK: Receipt
     class func saveReceipt(receipt:Receipt){
         
         try! realm.write {
@@ -66,6 +79,23 @@ class Model: NSObject {
         print("Number of Receipt: \(results.count)")
     }
 
+    class func receiptFind(havingItemData:Results<HavingItem>?) -> Results<Receipt> {
+        
+        var predicates: [NSPredicate] = []
+        
+        for havingItem in havingItemData! {
+            predicates.append(NSPredicate(format: "ANY items.name1 = %@", (havingItem.items?.name1)!))
+        }
+        
+        let compoundedPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        let receiptData = realm.objects(Receipt.self).filter(compoundedPredicate)
+        
+        //HavingItem をUpdate
+        return receiptData
+    }
+
+
+    //MARK: HavingItem
     class func findHavingItem(filter:String?) -> Results<HavingItem> {
         let ret: Results<HavingItem>
         
@@ -150,25 +180,43 @@ class Model: NSObject {
         return havingItem
     }
     
-    class func receiptFind(havingItemData:Results<HavingItem>?) -> Results<Receipt> {
 
-//        var predicates: [NSPredicate] = []
-//
-//        for word in wordsArray {
-//            predicates.append(NSPredicate(format: "search_word CONTAINS %@ OR name CONTAINS %@", word, word))
-//        }
-
-        var predicates: [NSPredicate] = []
+    //MARK: ShoppingList
+    class func saveShoppingList(shoppingList:ShoppingList){
         
-        for havingItem in havingItemData! {
-            predicates.append(NSPredicate(format: "ANY items.name1 = %@", (havingItem.items?.name1)!))
+        try! realm.write {
+            realm.add(shoppingList)
+        }
+        
+        let results = realm.objects(ShoppingList.self)
+        print("Number of ShoppingList: \(results.count)")
+    }
+
+    class func delShoppingList(shoppingList:ShoppingList){
+        
+        try! realm.write {
+            realm.delete(shoppingList)
         }
 
-        let compoundedPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)        
-        let receiptData = realm.objects(Receipt.self).filter(compoundedPredicate)
-        
-        //HavingItem をUpdate
-        return receiptData
+        let results = realm.objects(ShoppingList.self)
+        print("Number of ShoppingList: \(results.count)")
     }
+
     
+    class func findShoppingList(filter: NSPredicate?) -> Results<ShoppingList>? {
+        var ret: Results<ShoppingList>? = nil
+        
+        if (filter == nil) {
+            ret = realm.objects(ShoppingList.self)
+        } else {
+            if let filterUnwrap = filter {                
+                ret = realm.objects(ShoppingList.self).filter(filterUnwrap)
+            } else {
+//                ret = realm.objects(ShoppingList.self)
+            }
+        }
+        
+        return ret
+    }
+
 }

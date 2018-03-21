@@ -16,7 +16,7 @@ protocol ReceiptListControllerDelegate
     func showList()
 }
 
-class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate {
+class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate, UITabBarControllerDelegate {
 
     func reloadScrollView() {
         print("reloadScrollView")
@@ -31,17 +31,14 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
     private var myTabBar:TabBar!
     private var myScrollView:UIScrollView!
     private var myView:UIView!
-
-    let AddHavingItemView:AddHavingItemViewController = AddHavingItemViewController()
-    let ReceiptListItemView:ReceiptListViewController = ReceiptListViewController(titleName: "second")
     
     //Delegateを定義
     var delegate: ReceiptListControllerDelegate?
-    
+
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.ReceiptListItemView.rootViewCon = self
-        self.ReceiptListItemView.rootViewCon?.delegate = self.ReceiptListItemView
+        ReceiptListItemView.rootViewCon = self
+        ReceiptListItemView.rootViewCon?.delegate = ReceiptListItemView
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,14 +49,15 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = cGreen
        
         // Delegate
-        self.AddHavingItemView.delegate = self
-        self.ReceiptListItemView.rootViewCon = self
+        AddHavingItemView.delegate = self
+        ReceiptListItemView.rootViewCon = self
         
         self.navigationItem.title = "持っている食材"
-        
+
+    
         //******** UI 配置
         createUI()
         
@@ -186,30 +184,11 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
     
     func createTabUI() {
         
-        let width = self.view.frame.width
-        let height = self.view.frame.height
-        //デフォルトは49
-        let tabBarHeight:CGFloat = 70
+        myTabBar = createUITab(width:self.view.frame.width, height:self.view.frame.height) as! TabBar
         
-        /**   TabBarを設置   **/
-        myTabBar = TabBar()
-        myTabBar.frame = CGRect(x:0,y:height - tabBarHeight,width:width,height:tabBarHeight)
-        //バーの色
-        myTabBar.barTintColor = UIColor.black
-        //選択されていないボタンの色
-        myTabBar.unselectedItemTintColor = UIColor.white
-        //ボタンを押した時の色
-        myTabBar.tintColor = cBlue
-        
-        //ボタンを生成
-        let mostRecent:UITabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
-        let downloads:UITabBarItem = UITabBarItem(tabBarSystemItem: .featured , tag: 2)
-
-        //ボタンをタブバーに配置する
-        myTabBar.items = [mostRecent,downloads]
         //デリゲートを設定する
         myTabBar.delegate = self
-        
+
         self.view.addSubview(myTabBar)
  
     }
@@ -296,8 +275,8 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
     
     @objc func goNext(_ sender: UIButton) {// selectorで呼び出す場合Swift4からは「@objc」をつける。
 
-        self.AddHavingItemView.view.backgroundColor = UIColor(hue: 0.1833, saturation: 0.13, brightness: 1, alpha: 1.0)
-        self.present(self.AddHavingItemView, animated: true, completion: {
+        AddHavingItemView.view.backgroundColor = UIColor(hue: 0.1833, saturation: 0.13, brightness: 1, alpha: 1.0)
+        self.present(AddHavingItemView, animated: true, completion: {
             () -> Void in
             print("HavingItem追加へ遷移後")
         })
@@ -306,8 +285,8 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
     @objc func receiptSearch(_ sender: UIButton) {
 
         self.delegate?.showList()
-        self.ReceiptListItemView.view.backgroundColor = cRed2
-        self.navigationController?.pushViewController(self.ReceiptListItemView, animated: true)
+        ReceiptListItemView.view.backgroundColor = cRed2
+        self.navigationController?.pushViewController(ReceiptListItemView, animated: true)
 
     
     }
@@ -343,9 +322,15 @@ class ViewController: UIViewController, UITabBarDelegate, ViewControllerDelegate
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         switch item.tag{
         case 1:
+            //ホーム画面(持ってる食材リスト)
             print("１")
         case 2:
+            //買物リスト
             print("２")
+            ShoppingListView?.shoppingListData = Model.findShoppingList(filter: nil)
+            ShoppingListView?.view.backgroundColor = cBlue2
+            self.navigationController?.pushViewController(ShoppingListView!, animated: true)
+            
         default : return
             
         }

@@ -9,8 +9,14 @@
 import UIKit
 import RealmSwift
 
-class ReceiptListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ReceiptListControllerDelegate {
+protocol ReceiptDetailViewControllerDelegate
+{
+    // デリゲート関数を定義
+    func createReceiptDetailView(data:Receipt)
+}
 
+class ReceiptListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ReceiptListControllerDelegate {
+    
     func showList() {
        print("showList")
 
@@ -34,22 +40,26 @@ class ReceiptListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     
     
-    private let myArray: NSArray = ["First","Second","Third","Four","Five"]
     private var myTableView: UITableView!
     let titleName: String
     let TableViewCellIdentifier:String = "CELL"
     var havinItemData:Results<HavingItem>?
     var receiptData:Results<Receipt>?
-
     var rootViewCon:ViewController? = nil
 
-    
+    //Delegateを定義
+    var delegate: ReceiptDetailViewControllerDelegate?
     
     init(titleName: String) {
         self.titleName = titleName
         super.init(nibName: nil, bundle: nil)
+        ReceiptDetailView?.rootViewCon = self
+        ReceiptDetailView?.rootViewCon?.delegate = ReceiptDetailView
+        
+        self.navigationItem.title = "レシピ一覧"
     }
 
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,7 +85,15 @@ class ReceiptListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Num: \(indexPath.row)")
-        print("Value: \(myArray[indexPath.row])")
+//        print("Value: \(myArray[indexPath.row])")
+        
+        //ページ移動
+        let receiptDataSelect:Receipt = receiptData![indexPath.row]
+        
+        self.delegate?.createReceiptDetailView(data:receiptDataSelect)
+        ReceiptDetailView?.view.backgroundColor = cYellow
+        self.navigationController?.pushViewController(ReceiptDetailView!, animated: true)
+
     }
     
     //何行分 作成するか？
@@ -112,6 +130,25 @@ class ReceiptListViewController: UIViewController, UITableViewDelegate, UITableV
     {
         return 200.0;//Choose your custom row height
     }
+
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.tag{
+        case 1:
+            //ホーム画面(持ってる食材リスト)
+            print("１")
+//            self.navigationController?.pushViewController(RootView!, animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
+        case 2:
+            //買物リスト
+            print("２")
+            ShoppingListView?.shoppingListData = Model.findShoppingList(filter: nil)
+            ShoppingListView?.view.backgroundColor = cBlue2
+            self.navigationController?.pushViewController(ShoppingListView!, animated: true)
+        default : return
+            
+        }
+    }
+
 }
 
 
